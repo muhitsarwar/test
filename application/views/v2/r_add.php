@@ -1,5 +1,5 @@
 <?php
-$pageTitle = 'profile';
+$pageTitle = 'Add Patient';
 include_once 'Header.php'
 ?>
 <link rel="stylesheet" href="<?php echo base_url(); ?>jquery-ui.css">
@@ -24,12 +24,13 @@ include_once 'Header.php'
             $('#float').removeClass("has-error");
             $('#float').removeClass("has-success");
 
-           
 
-       
+
+            var r = confirm("Do you want to add this patient?");
+            if (r == true) {
                 $.ajax({url: '<?php echo base_url() . "recp/addpatient"; ?>',
-                    data: {fname: $(fname).val(),lname:$(lname).val(),hight:$(hight).val(),weight:$(weight).val(),
-                        pNo: $(pNo).val(), wNo: $(wNo).val(),gender:  $(gender).val()},
+                    data: {fname: $(fname).val(), lname: $(lname).val(), hight: $(hight).val(), weight: $(weight).val(),
+                        pNo: $(pNo).val(), wNo: $(wNo).val(), gender: $(gender).val()},
                     type: 'get',
                     success: function (data) {
                         $("#pId").html(data);
@@ -38,7 +39,8 @@ include_once 'Header.php'
                         $('#float').addClass("has-success");
                     }
                 }); // get the id from the hidden input
-          
+            }
+
         });
 
     });
@@ -49,7 +51,7 @@ include_once 'Header.php'
         <div class="jumbotron">
             <div class="container">
                 <h1>Clinic Mangement System</h1>
-                <h3>Nurse Module</h3>
+                <h3>Receptionist Module</h3>
             </div> 
         </div> 
     </header>
@@ -106,7 +108,7 @@ include_once 'Header.php'
                                     <div id ="pId" class="modal-body">
 
 
-                                        
+
 
                                     </div>
 

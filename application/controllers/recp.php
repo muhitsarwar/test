@@ -88,6 +88,18 @@ class recp extends CI_Controller {
         $this->recp_user->updateProfile($pNo, $pwd, $gender);
     }
     
+    public function prelease() {
+        $this->checkLogin();
+        $pid = $_GET['pid'];
+
+
+
+        $this->load->model('recp_user');
+//
+        $this->recp_user->prelease($pid);
+    }
+    
+    
     public function checkLogin() {
         $id = (int) $this->session->userdata('user_name');
         $id = (int)($id/10000);

@@ -44,17 +44,19 @@ include_once 'Header.php'
 
 
         $('#uop').on('click', 'table tbody tr .cbox', function () {
-           
+
             var index = $('.cbox').index(this);
 
-
-            $.ajax({url: '<?php echo base_url() . "nurse/rOperation"; ?>',
-                data: {po_id: $(this).parent('td').parent('tr').children('td').eq(0).text()},
-                type: 'get',
-                success: function (data) {
-                 
-                }
-            });
+            var r = confirm("Do you want to add operation " + $(this).parent('td').parent('tr').children('td').eq(0).text());
+            if (r == true) {
+                $.ajax({url: '<?php echo base_url() . "nurse/rOperation"; ?>',
+                    data: {po_id: $(this).parent('td').parent('tr').children('td').eq(0).text()},
+                    type: 'get',
+                    success: function (data) {
+                        window.location.reload();
+                    }
+                });
+            }
         });
 
     });
@@ -92,7 +94,7 @@ include_once 'Header.php'
                         </div>
                         <div id="medicine" class="panel-collapse collapse in">
                             <div id ="uop" class="panel-body">
-                                
+
                             </div>
                         </div>
                     </div>
@@ -105,7 +107,7 @@ include_once 'Header.php'
                         </div>
                         <div id="test" class="panel-collapse collapse">
                             <div id ="rop" class="panel-body">
-                                
+
                             </div>
                         </div>
                     </div>
@@ -118,7 +120,7 @@ include_once 'Header.php'
                         </div>
                         <div id="tes" class="panel-collapse collapse">
                             <div id ="aop" class="panel-body">
-                                
+
                             </div>
                         </div>
                     </div>

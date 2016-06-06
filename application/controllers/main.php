@@ -27,9 +27,11 @@ class Main extends CI_Controller {
         if ($this->session->userdata('is_logged_in')) {
             $id = (int) $this->session->userdata('user_name');
             $id = (int) ($id / 10000);
-
+            
+            
+            
             switch ($id) {
-                case 11: redirect('doctor/profile');
+                case 11: redirect('doctor/');
                     break;
                 case 12:redirect('nurse/profile');
                     break;
@@ -62,6 +64,7 @@ class Main extends CI_Controller {
             $data = array(
                 'user_name' => $this->input->post('user_name'),
                 'is_logged_in' => 1
+               
             );
 
             $this->session->set_userdata($data);

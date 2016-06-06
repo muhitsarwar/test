@@ -1,4 +1,5 @@
 <?php
+
 $pageTitle = 'Prescribe';
 include_once 'Header.php'
 ?>
@@ -11,7 +12,7 @@ include_once 'Header.php'
 
 <script>
     $(function () {
-
+       $('#pid').val('<?php   echo $_SESSION['current_patient']; ?>'); 
         $.ajax({url: '<?php echo base_url() . "doctor/getNav"; ?>',
             data: {aTab: "Prescribe"},
             type: 'get',
@@ -54,35 +55,41 @@ include_once 'Header.php'
         $('#button').click(function () {
             $('#tContainer').removeClass('has-success');
             $('#tContainer').addClass('has-error');
-            $.ajax({url: '<?php echo base_url() . "doctor/addtest"; ?>',
-                data: {pid: $('#pid').val(), tid: $('#ptest').val()},
-                type: 'get',
-                success: function (data) {
-                    
-                    $('#ptest').val('');
-                    $('#tContainer').addClass('has-success');
-                    $('#tContainer').removeClass('has-error');
-                }
-            }); // get the id from the hidden input
+            var r = confirm("Do you want to add test " + $('#ptest').val());
+            if (r == true) {
+                $.ajax({url: '<?php echo base_url() . "doctor/addtest"; ?>',
+                    data: {pid: $('#pid').val(), tid: $('#ptest').val()},
+                    type: 'get',
+                    success: function (data) {
+
+                        $('#ptest').val('');
+                        $('#tContainer').addClass('has-success');
+                        $('#tContainer').removeClass('has-error');
+                    }
+                }); // get the id from the hidden input
+            }
         });
         $('#mbutton').click(function () {
 
             $('#mContainer').removeClass('has-success');
             $('#mContainer').addClass('has-error');
-            $.ajax({url: '<?php echo base_url() . "doctor/addmedicine"; ?>',
-                data: {mid: $('#mname').val(),
-                    date: $('#mdate').val(),
-                    time: $('#mtime').val(),
-                    quan: $('#mquantity').val(),
-                    repeat: $('#repeat').val(),
-                    pid: $('#pid').val()},
-                type: 'get',
-                success: function (data) {
-                    
-                    $('#mContainer').addClass('has-success');
-                    $('#mContainer').removeClass('has-error');
-                }
-            }); // get the id from the hidden input
+            var r = confirm("Do you want to add medicine " + $('#mname').val()+" starting at " + $('#mdate').val() +" repeating day(s) " + $('#repeat').val());
+            if (r == true) {
+                $.ajax({url: '<?php echo base_url() . "doctor/addmedicine"; ?>',
+                    data: {mid: $('#mname').val(),
+                        date: $('#mdate').val(),
+                        time: $('#mtime').val(),
+                        quan: $('#mquantity').val(),
+                        repeat: $('#repeat').val(),
+                        pid: $('#pid').val()},
+                    type: 'get',
+                    success: function (data) {
+                 
+                        $('#mContainer').addClass('has-success');
+                        $('#mContainer').removeClass('has-error');
+                    }
+                }); // get the id from the hidden input
+            }
         });
 
     });

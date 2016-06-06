@@ -1,4 +1,5 @@
 <?php
+
 $pageTitle = 'Create Operation';
 include_once 'Header.php'
 ?>
@@ -11,7 +12,7 @@ include_once 'Header.php'
 
 <script>
     $(function () {
-
+        $('#pid').val('<?php  echo $_SESSION['current_patient']; ?>'); 
         $.ajax({url: '<?php echo base_url() . "doctor/getNav"; ?>',
             data: {aTab: "Create Operation"},
             type: 'get',

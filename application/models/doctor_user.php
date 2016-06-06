@@ -16,6 +16,10 @@ class doctor_user extends CI_Model {
     }
 
     public function addmedicine($mid, $time, $quan, $pid) {
+        $query = $this->db->query(sprintf("select * from visit where p_id = %d and d_id = %d",(int)$pid,(int)$this->session->userdata('user_name')));
+        if(!($query != NULL && $query->num_rows() == 1)){
+             $query = $this->db->query(sprintf("INSERT INTO `hms`.`visit` (`DATE`, `V_ID`, `D_ID`, `P_ID`) VALUES (current_date(), NULL, %d, %d);",(int)$this->session->userdata('user_name'),(int)$pid));
+        }
         $query = $this->db->query(sprintf("INSERT INTO `hms`.`prescribed_medicine` (`M_ID`, `TIME`, `V_ID`, `QUANTITY`,`nurse_check`)"
                         . " VALUES (%d, '%s',(select max(v_id) from visit where"
                         . " d_id = %d and p_id = %d ) , %d,'NOT USED')", $mid, $time, (int) $this->session->userdata('user_name'), (int) $pid, $quan));

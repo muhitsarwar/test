@@ -25,29 +25,35 @@ include_once 'Header.php'
 
             $('#med').removeClass('has-success');
             $('#med').addClass('has-error');
-            $.ajax({url: '<?php echo base_url() . "nurse/amed"; ?>',
-                data: {mid: $('#mname').val()},
-                type: 'get',
-                success: function (data) {
-                    
-                    $('#med').addClass('has-success');
-                    $('#med').removeClass('has-error');
-                }
-            }); // get the id from the hidden input
+            var r = confirm("Do you want to add medicine" + $('#mname').val());
+            if (r == true) {
+                $.ajax({url: '<?php echo base_url() . "nurse/amed"; ?>',
+                    data: {mid: $('#mname').val()},
+                    type: 'get',
+                    success: function (data) {
+
+                        $('#med').addClass('has-success');
+                        $('#med').removeClass('has-error');
+                    }
+                }); // get the id from the hidden input
+            }
         });
         $('#aeq').click(function () {
 
             $('#eq').removeClass('has-success');
             $('#eq').addClass('has-error');
-            $.ajax({url: '<?php echo base_url() . "nurse/aeq"; ?>',
-                data: {eid: $('#ename').val()},
-                type: 'get',
-                success: function (data) {
+            var r = confirm("Do you want to add equpment" + $('#ename').val());
+            if (r == true) {
+                $.ajax({url: '<?php echo base_url() . "nurse/aeq"; ?>',
+                    data: {eid: $('#ename').val()},
+                    type: 'get',
+                    success: function (data) {
 
-                    $('#eq').addClass('has-success');
-                    $('#eq').removeClass('has-error');
-                }
-            }); // get the id from the hidden input
+                        $('#eq').addClass('has-success');
+                        $('#eq').removeClass('has-error');
+                    }
+                }); // get the id from the hidden input
+            }
         });
 
 

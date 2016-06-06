@@ -1,5 +1,5 @@
 <?php
-$pageTitle = 'profile';
+$pageTitle = 'Release Patient';
 include_once 'Header.php'
 ?>
 <link rel="stylesheet" href="<?php echo base_url(); ?>jquery-ui.css">
@@ -20,26 +20,42 @@ include_once 'Header.php'
             }
         });
 
-        $('#apet').click(function () {
+        $('#xpett').click(function () {
             $('#float').removeClass("has-error");
             $('#float').removeClass("has-success");
+            $.ajax({url: '<?php echo base_url() . "recp/pexpense"; ?>',
+                data: {pid: $('#pid').val()},
+                type: 'get',
+                success: function (data) {
+                    $("#cost").html(data);
+                    $('#float').removeClass("has-error");
+                    $('#float').removeClass("has-success");
+                    $('#float').addClass("has-success");
+                }
+            }); // get the id from the hidden input
 
-           
+        });
 
-       
-                $.ajax({url: '<?php echo base_url() . "recp/addpatient"; ?>',
-                    data: {fname: $(fname).val(),lname:$(lname).val(),hight:$(hight).val(),weight:$(weight).val(),
-                        pNo: $(pNo).val(), wNo: $(wNo).val(),gender:  $(gender).val()},
+        $('#rpet').click(function () {
+            $('#float').removeClass("has-error");
+            $('#float').removeClass("has-success");
+            var r = confirm("Do you want to release patient "+$('#pid').val());
+            if (r == true) {
+                $.ajax({url: '<?php echo base_url() . "recp/prelease"; ?>',
+                    data: {pid: $('#pid').val()},
                     type: 'get',
                     success: function (data) {
-                        $("#pId").html(data);
+                        alert(data);
                         $('#float').removeClass("has-error");
                         $('#float').removeClass("has-success");
                         $('#float').addClass("has-success");
                     }
                 }); // get the id from the hidden input
-          
+            }
+
         });
+
+
 
     });
 </script>
@@ -49,7 +65,7 @@ include_once 'Header.php'
         <div class="jumbotron">
             <div class="container">
                 <h1>Clinic Mangement System</h1>
-                <h3>Nurse Module</h3>
+                <h3>Receptionist Module</h3>
             </div> 
         </div> 
     </header>
@@ -67,13 +83,13 @@ include_once 'Header.php'
             <div id ="float" class="col-sm-8 well">
 
                 <input type="text" id="pid" class="form-control" placeholder="Patient Id">
-                 <button id ="spet" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-1">Find Expense</button>
-                 <hr>
-                 <hr>
-                 <div id ="cost">
-                    
+                <button id ="xpet" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-1">Find Expense</button>
+                <hr>
+                <hr>
+                <div id ="cost">
+
                 </div>
-                 <button id ="rpet" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-1">Release Patient</button>
+                <button id ="rpet" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-1">Release Patient</button>
 
 
 

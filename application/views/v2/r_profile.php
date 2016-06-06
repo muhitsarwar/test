@@ -62,7 +62,7 @@ include_once 'Header.php'
         <div class="jumbotron">
             <div class="container">
                 <h1>Clinic Mangement System</h1>
-                <h3>Nurse Module</h3>
+                <h3>Receptionist Module</h3>
             </div> 
         </div> 
     </header>

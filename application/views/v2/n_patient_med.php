@@ -28,26 +28,25 @@ include_once 'Header.php'
         });
 
 
-        
-        
+
+
 
         $('#med').on('click', 'table tbody tr .cbox', function () {
-            $('#med').removeClass("has-error");
-            $('#med').removeClass("has-success");
-            var index = $('.cbox').index(this);
-            
 
-            $.ajax({url: '<?php echo base_url() . "nurse/done"; ?>',
-                data: {vid: $(this).parent('td').parent('tr').children('td').eq(0).text(),
-                    mid: $(this).parent('td').parent('tr').children('td').eq(3).text(),
-                    time: $(this).parent('td').parent('tr').children('td').eq(5).text()},
-                type: 'get',
-                success: function (data) {
-                    $('#med').removeClass("has-error");
-                        $('#med').removeClass("has-success");
-                        $('#med').addClass("has-success");
-                }
-            });
+            var index = $('.cbox').index(this);
+
+            var r = confirm("Do you want to use medicine " + $(this).parent('td').parent('tr').children('td').eq(4).text() + " for " + $(this).parent('td').parent('tr').children('td').eq(2).text());
+            if (r == true) {
+                $.ajax({url: '<?php echo base_url() . "nurse/done"; ?>',
+                    data: {vid: $(this).parent('td').parent('tr').children('td').eq(0).text(),
+                        mid: $(this).parent('td').parent('tr').children('td').eq(3).text(),
+                        time: $(this).parent('td').parent('tr').children('td').eq(5).text()},
+                    type: 'get',
+                    success: function (data) {
+                        window.location.reload();
+                    }
+                });
+            }
         });
 
     });
@@ -75,7 +74,7 @@ include_once 'Header.php'
             </div>
             <div id ="med" class="col-sm-8 ">
 
-                
+
 
 
 

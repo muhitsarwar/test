@@ -56,9 +56,12 @@ class doctor extends CI_Controller {
 
     public function profile() {
         $this->checkLogin();
+        session_start();
+        $_SESSION['current_patient'] = '';
 
         $this->load->view('v2/d_profile');
     }
+
 
     public function showProfile() {
         $this->checkLogin();
@@ -91,7 +94,7 @@ class doctor extends CI_Controller {
 
     public function phistory() {
         $this->checkLogin();
-
+        session_start();
         $this->load->view('v2/d_patient_history');
     }
 
@@ -99,6 +102,7 @@ class doctor extends CI_Controller {
         $this->checkLogin();
         $pid = $_GET['pid'];
 
+        $_SESSION["current_patient"] = $pid;
         $this->load->model('doctor_user');
         $result = $this->doctor_user->show_report($pid);
 
@@ -129,7 +133,8 @@ class doctor extends CI_Controller {
     public function patientInfo() {
         $this->checkLogin();
         $pid = $_GET['pid'];
-
+        session_start();
+        $_SESSION["current_patient"] = $pid;
         $this->load->model('doctor_user');
         $result = $this->doctor_user->patientInfo($pid);
 
@@ -163,6 +168,7 @@ class doctor extends CI_Controller {
     public function patientMed() {
         $this->checkLogin();
         $pid = $_GET['pid'];
+        $_SESSION["current_patient"] = $pid;
         $template = array(
             'table_open' => '<table class="table table-hover">',
             'thead_open' => '<thead>',
@@ -286,6 +292,7 @@ class doctor extends CI_Controller {
 
     public function prescribe() {
         $this->checkLogin();
+        session_start();
         $this->load->view('v2/d_prescribe');
     }
 
@@ -295,11 +302,13 @@ class doctor extends CI_Controller {
 
     public function operation() {
         $this->checkLogin();
+        session_start();
         $this->load->view('v2/d_create_operation');
     }
 
     public function approve() {
         $this->checkLogin();
+        session_start();
         $this->load->view('v2/d_approve');
     }
 
@@ -307,7 +316,8 @@ class doctor extends CI_Controller {
         $this->checkLogin();
         $pid = $_GET['pid'];
         $tid = $_GET['tid'];
-
+        session_start();
+        $_SESSION["current_patient"] = $pid;
         $this->load->model('doctor_user');
 
         $this->doctor_user->addtest($pid, $tid);
@@ -375,9 +385,12 @@ class doctor extends CI_Controller {
         $quan = $_GET['quan'];
         $pid = $_GET['pid'];
         $repeat = $_GET['repeat'];
+        
+        session_start();
+        $_SESSION["current_patient"] = $pid;
 
         $this->load->model('doctor_user');
-        for ($i; $i < (int) $repeat; $i++) {
+        for ($i = 0; $i < (int) $repeat; $i++) {
             $tdate = $date;
             $date = strtotime($date . ' ' . $time);
             $date = date('Y-m-d H:i', $date);
@@ -385,7 +398,6 @@ class doctor extends CI_Controller {
             $this->doctor_user->addmedicine($mid, $date, $quan, $pid);
             $tdate++;
             $date = $tdate;
-            
         }
     }
 
@@ -395,7 +407,8 @@ class doctor extends CI_Controller {
         $date = $_GET['date'];
         $time = $_GET['time'];
         $pid = $_GET['pid'];
-
+        session_start();
+        $_SESSION["current_patient"] = $pid;
         $date = strtotime($date . ' ' . $time);
         $date = date('Y-m-d H:i', $date);
         $did = (int) $this->session->userdata('user_name');
@@ -415,7 +428,8 @@ class doctor extends CI_Controller {
         $time = $_GET['time'];
         $dida = $_GET['did'];
         $pid = $_GET['pid'];
-
+        session_start();
+        $_SESSION["current_patient"] = $pid;
         $date = strtotime($date . ' ' . $time);
         $date = date('Y-m-d H:i', $date);
         $dids = explode(" ", $dida);

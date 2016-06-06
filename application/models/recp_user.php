@@ -11,6 +11,24 @@ class recp_user extends CI_Model {
         $query = $this->db->query(sprintf("update patient set release_date = curdate() where id = %d",$pid));
         
     }
+    
+    public function prelease($pid){
+        $this->db->query(sprintf("delete from doctor_operation where po_id in (select po_id from patient_operation where p_id = %d)",(int)$pid));
+        $this->db->query(sprintf("delete from nurse_operation where po_id in (select po_id from patient_operation where p_id = %d)",(int)$pid));
+        $this->db->query(sprintf("delete from operation_medicine where po_id in (select po_id from patient_operation where p_id = %d)",(int)$pid));
+        $this->db->query(sprintf("delete from operation_equipment where po_id in (select po_id from patient_operation where p_id = %d)",(int)$pid));
+        $this->db->query(sprintf("delete from patient_operation where p_id = %d",(int)$pid));
+        
+        $this->db->query(sprintf("delete from prescribed_medicine where v_id in (select v_id from visit where p_id = %d)",(int)$pid));
+        $this->db->query(sprintf("delete from prescribed_test where v_id in (select v_id from visit where p_id = %d)",(int)$pid));
+       $this->db->query(sprintf("delete from visit where p_id = %d",(int)$pid));
+        
+        $this->db->query(sprintf("delete from patient where id = %d",(int)$pid));
+        
+        
+        
+    }
+    
     public function showProfile() {
         $query = $this->db->query(sprintf("SELECT concat(first_name,' ', last_name) name,gender,join_date jDate, phn_no pNO from recp where id = %d",(int) $this->session->userdata('user_name')));
 

@@ -8,7 +8,9 @@ include_once 'Header.php'
 <script src="<?php echo base_url(); ?>jquery-ui.js"></script>
 <link rel="stylesheet" href="<?php echo base_url(); ?>css/bootstrap.min.css">
 <link rel="stylesheet" href="<?php echo base_url(); ?>css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="<?php echo base_url(); ?>css/clockface.css">
 <script src="<?php echo base_url(); ?>js/bootstrap.min.js"></script>
+<script src="<?php echo base_url(); ?>js/clockface.js"></script>
 
 <script>
     $(function () {
@@ -92,6 +94,7 @@ include_once 'Header.php'
                 }); // get the id from the hidden input
             }
         });
+        $('#time').clockface({format: 'HH:mm'}); 
 
     });
 </script>
@@ -123,7 +126,7 @@ include_once 'Header.php'
                     <hr>
                     Date: <input type="date" id="date" class="form-control">
                     <hr>
-                    Time:<input type="time" id="time" class="form-control"> 
+                   <input type="text" id="time" value ="0:0" placeholder="Time"  data-format="HH:mm" class="form-control">
                     <hr>
                     <button type="button" id = "cOperation" class="btn btn-primary">Create Operation</button>	
 

@@ -1,5 +1,4 @@
 <?php
-
 $pageTitle = 'Prescribe';
 include_once 'Header.php'
 ?>
@@ -8,11 +7,13 @@ include_once 'Header.php'
 <script src="<?php echo base_url(); ?>jquery-ui.js"></script>
 <link rel="stylesheet" href="<?php echo base_url(); ?>css/bootstrap.min.css">
 <link rel="stylesheet" href="<?php echo base_url(); ?>css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="<?php echo base_url(); ?>css/clockface.css">
 <script src="<?php echo base_url(); ?>js/bootstrap.min.js"></script>
+<script src="<?php echo base_url(); ?>js/clockface.js"></script>
 
 <script>
     $(function () {
-       $('#pid').val('<?php   echo $_SESSION['current_patient']; ?>'); 
+        $('#pid').val('<?php echo $_SESSION['current_patient']; ?>');
         $.ajax({url: '<?php echo base_url() . "doctor/getNav"; ?>',
             data: {aTab: "Prescribe"},
             type: 'get',
@@ -73,7 +74,8 @@ include_once 'Header.php'
 
             $('#mContainer').removeClass('has-success');
             $('#mContainer').addClass('has-error');
-            var r = confirm("Do you want to add medicine " + $('#mname').val()+" starting at " + $('#mdate').val() +" repeating day(s) " + $('#repeat').val());
+
+            var r = confirm("Do you want to add medicine " + $('#mname').val() + " starting at " + $('#mdate').val() + " repeating day(s) " + $('#repeat').val());
             if (r == true) {
                 $.ajax({url: '<?php echo base_url() . "doctor/addmedicine"; ?>',
                     data: {mid: $('#mname').val(),
@@ -84,13 +86,15 @@ include_once 'Header.php'
                         pid: $('#pid').val()},
                     type: 'get',
                     success: function (data) {
-                 
+                        
                         $('#mContainer').addClass('has-success');
                         $('#mContainer').removeClass('has-error');
                     }
                 }); // get the id from the hidden input
             }
         });
+
+        $('#mtime').clockface({format: 'HH:mm'});
 
     });
 </script>
@@ -124,7 +128,9 @@ include_once 'Header.php'
                     <hr>
                     <input type="text" id="repeat" class="form-control" placeholder="Repeat">
                     <hr>
-                    Time:<input type="time" id="mtime" class="form-control"> 
+                    Time:
+                    <input type="text" id="mtime" value ="0:0" placeholder="Time"  data-format="HH:mm" class="form-control">
+<!--                    <input type="time" id="mtime" class="input-small"> -->
                     <hr>
                     <input type="text" id="mquantity" class="form-control" placeholder="Quantity">
                     <hr>

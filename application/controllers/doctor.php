@@ -393,20 +393,23 @@ class doctor extends CI_Controller {
         $quan = $_GET['quan'];
         $pid = $_GET['pid'];
         $repeat = $_GET['repeat'];
-
+        
+        
         session_start();
         $_SESSION["current_patient"] = $pid;
-
+//
         $this->load->model('doctor_user');
+        
         for ($i = 0; $i < (int) $repeat; $i++) {
             $tdate = $date;
             $date = strtotime($date . ' ' . $time);
             $date = date('Y-m-d H:i', $date);
-
+//
             $this->doctor_user->addmedicine($mid, $date, $quan, $pid);
             $tdate++;
             $date = $tdate;
         }
+        echo 'ok';
     }
 
     public function createOperation() {

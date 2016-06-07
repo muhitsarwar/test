@@ -41,7 +41,7 @@ include_once 'Header.php'
                     elm_8: $('#elm_8').attr('placeholder') + ': ' + $('#elm_8').val() },
                 type: 'get',
                 success: function (data) {
-                    alert(data);
+                   
                 }
             });
         });

@@ -20,10 +20,10 @@ include_once 'Header.php'
             }
         });
 
-        $('#xpett').click(function () {
+        $('#xpet').click(function () {
             $('#float').removeClass("has-error");
             $('#float').removeClass("has-success");
-            $.ajax({url: '<?php echo base_url() . "recp/pexpense"; ?>',
+            $.ajax({url: '<?php echo base_url() . "recp/tcost"; ?>',
                 data: {pid: $('#pid').val()},
                 type: 'get',
                 success: function (data) {
@@ -39,13 +39,13 @@ include_once 'Header.php'
         $('#rpet').click(function () {
             $('#float').removeClass("has-error");
             $('#float').removeClass("has-success");
-            var r = confirm("Do you want to release patient "+$('#pid').val());
+            var r = confirm("Do you want to release patient " + $('#pid').val());
             if (r == true) {
                 $.ajax({url: '<?php echo base_url() . "recp/prelease"; ?>',
                     data: {pid: $('#pid').val()},
                     type: 'get',
                     success: function (data) {
-                        alert(data);
+                        window.location.reload();
                         $('#float').removeClass("has-error");
                         $('#float').removeClass("has-success");
                         $('#float').addClass("has-success");
@@ -86,9 +86,12 @@ include_once 'Header.php'
                 <button id ="xpet" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-1">Find Expense</button>
                 <hr>
                 <hr>
-                <div id ="cost">
+                <div class = "row" id ="cost">
+                    <div class = "col-sm-4 well">
 
+                    </div>
                 </div>
+                <br>
                 <button id ="rpet" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-1">Release Patient</button>
 
 

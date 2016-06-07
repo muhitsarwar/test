@@ -62,7 +62,6 @@ class doctor extends CI_Controller {
         $this->load->view('v2/d_profile');
     }
 
-
     public function showProfile() {
         $this->checkLogin();
 
@@ -115,9 +114,11 @@ class doctor extends CI_Controller {
             $profile .= 'Test Name: ';
             $profile .= $row['tName'];
             $profile .= "<hr>";
-            $profile .= 'Report: ';
-            $profile .='<a href = "' . base_url() . 'reports/' . $row['tReport'] . '">click to view</a>';
-            $profile .= "<hr>";
+            if ($row['tReport'] != '') {
+                $profile .= 'Report: ';
+                $profile .='<a href = "' . base_url() . 'reports/' . $row['tReport'] . '">click to view</a>';
+                $profile .= "<hr>";
+            }
             $profile .= 'Date: ';
             $profile .= $row['vDate'];
             $profile .= "<hr>";
@@ -385,7 +386,7 @@ class doctor extends CI_Controller {
         $quan = $_GET['quan'];
         $pid = $_GET['pid'];
         $repeat = $_GET['repeat'];
-        
+
         session_start();
         $_SESSION["current_patient"] = $pid;
 

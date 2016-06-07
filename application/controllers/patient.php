@@ -137,8 +137,7 @@ class patient extends CI_Controller {
             $result = $this->patient_user->test_data($pid);
         else if ($info_for == 'operation_data')
             $result = $this->patient_user->operation_data($pid);
-        else if ($info_for == 'total_cost')
-            $result = $this->patient_user->total_cost($pid);
+        
         echo $this->table->generate($result);
     }
 
@@ -165,6 +164,9 @@ class patient extends CI_Controller {
             $profile .= "<hr>";
             $profile .= 'by(Doctor): ';
             $profile .= $row['dName'];
+            $profile .= "<hr>";
+            $profile .= 'cost: ';
+            $profile .= $row['cost'];
             $profile .= "<hr>";
             $profile .= "</div>";
         }
@@ -253,7 +255,6 @@ class patient extends CI_Controller {
         $this->load->model('patient_user');
         $result = $this->patient_user->show_reportw();
 
-//        echo 'ok';
 
 
         $profile = '';
@@ -268,11 +269,16 @@ class patient extends CI_Controller {
             $profile .= 'by(Doctor): ';
             $profile .= $row['dName'];
             $profile .= "<hr>";
+            $profile .= 'cost: ';
+            $profile .= $row['cost'];
+            $profile .= "<hr>";
             $profile .= "</div>";
         }
 
         echo $profile;
     }
+    
+    
 
 }
 

@@ -9,7 +9,7 @@
 class patient_user extends CI_Model {
 
     public function show_reportr() {
-        $query = $this->db->query(sprintf("select t.name tName,concat(d.first_name,' ',d.last_name) "
+        $query = $this->db->query(sprintf("select t.cost 'cost', t.name tName,concat(d.first_name,' ',d.last_name) "
                         . "dName,v.date vDate,pt.report tReport from prescribed_test pt,test t,doctor d,visit v "
                         . "where pt.report <> '' and pt.report is not null and v.p_id = %d and pt.t_id = t.id and v.v_id = pt.v_id and v.d_id = "
                         . "d.id", (int) $this->session->userdata('user_name')));
@@ -17,7 +17,7 @@ class patient_user extends CI_Model {
     }
 
     public function show_reportw() {
-        $query = $this->db->query(sprintf("select t.name tName,concat(d.first_name,' ',d.last_name) "
+        $query = $this->db->query(sprintf("select t.cost 'cost', t.name tName,concat(d.first_name,' ',d.last_name) "
                         . "dName,v.date vDate,pt.report tReport from prescribed_test pt,test t,doctor d,visit v "
                         . "where (pt.report = '' or pt.report is null) and v.p_id = %d and pt.t_id = t.id and v.v_id = pt.v_id and v.d_id = "
                         . "d.id", (int) $this->session->userdata('user_name')));
@@ -48,7 +48,7 @@ class patient_user extends CI_Model {
     public function getPOperation() {
 
         $query = $this->db->query(sprintf("select o.name 'Operation', po.time"
-                . " 'Time' from patient_operation po , operation o where po.o_id = o.id"
+                . " 'Time', o.cost 'Cost' from patient_operation po , operation o where po.o_id = o.id"
                 . " and p_id = %d and po.time < curtime() ", (int) $this->session->userdata('user_name')));
 
         return $query;
@@ -56,8 +56,8 @@ class patient_user extends CI_Model {
     
     public function getUOperation() {
 
-        $query = $this->db->query(sprintf("select o.name 'Operation', po.time"
-                . " 'Time' from patient_operation po , operation o where po.o_id = o.id"
+        $query = $this->db->query(sprintf("select  o.name 'Operation', po.time"
+                . " 'Time', o.cost 'Cost' from patient_operation po , operation o where po.o_id = o.id"
                 . " and p_id = %d and po.time > curtime() ", (int) $this->session->userdata('user_name')));
 
         return $query;
@@ -110,15 +110,7 @@ class patient_user extends CI_Model {
         return $query;
     }
 
-    public function total_cost($pid) {
 
-        $query = $this->db->query(sprintf("select med_cost(%d) as 'med cost' ,"
-                        . "test_cost(%d) as 'test cost',"
-                        . "serg_cost(%d) as 'sergery cost',"
-                        . "total_cost(%d) as 'total cost'", $pid, $pid, $pid, $pid));
-
-        return $query;
-    }
 
 }
 

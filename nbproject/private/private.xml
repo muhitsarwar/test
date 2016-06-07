@@ -3,13 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/test/application/controllers/doctor.php</file>
-            <file>file:/C:/xampp/htdocs/test/application/models/doctor_user.php</file>
             <file>file:/C:/xampp/htdocs/test/application/controllers/recp.php</file>
-            <file>file:/C:/xampp/htdocs/test/application/views/v2/d_approve.php</file>
             <file>file:/C:/xampp/htdocs/test/application/views/v2/r_bill.php</file>
             <file>file:/C:/xampp/htdocs/test/application/views/v2/r_add.php</file>
-            <file>file:/C:/xampp/htdocs/test/application/views/v2/d_prescribe.php</file>
+            <file>file:/C:/xampp/htdocs/test/application/controllers/tech.php</file>
             <file>file:/C:/xampp/htdocs/test/application/views/v2/r_profile.php</file>
             <file>file:/C:/xampp/htdocs/test/application/models/recp_user.php</file>
         </group>

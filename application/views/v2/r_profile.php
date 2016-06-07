@@ -31,11 +31,11 @@ include_once 'Header.php'
             $('#float').removeClass("has-error");
             $('#float').removeClass("has-success");
             $('#float').addClass("has-error");
-            var gender = $('#gender').val();
+            var gender = $('#gender option:selected').text();
             var pNo = parseInt($('#pNo').val());
             var pwd1 = $('#pwd1').val();
             var pwd2 = $('#pwd2').val();
-            if(!Number.isInteger(pNo))return;
+            if(isNaN(pNo) && $('#pNo').val() != "")return;
             if (pwd1 == pwd2) {
                 $.ajax({url: '<?php echo base_url() . "recp/updateProfile"; ?>',
                     data: {gender: gender,
@@ -101,14 +101,18 @@ include_once 'Header.php'
 
 
 
-                                        <input type="text" id="gender" class="form-control" placeholder="Gender">
+                                        <select class="form-control"  id="gender">
+                                            <option >Male</option>
+                                            <option >Female</option>
+                                        </select>
                                         <hr>
                                         <div class="input-group">
                                             <span class="input-group-addon">+880</span>
                                             <input type="text" id="pNo"  class="form-control" placeholder="Phone No">
                                         </div>
-                                        <hr>
 
+                                        <hr>
+                                        <input type="password" id="pwd3" class="form-control" placeholder="Old Password">
                                         Change Password:
                                         <input type="password" id="pwd1" class="form-control" placeholder="New Password">
                                         <input type="password" id="pwd2" class="form-control" placeholder="Confirm PassWord">

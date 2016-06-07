@@ -30,7 +30,7 @@ include_once 'Header.php'
             if (r == true) {
                 $.ajax({url: '<?php echo base_url() . "recp/addpatient"; ?>',
                     data: {fname: $(fname).val(), lname: $(lname).val(), hight: $(hight).val(), weight: $(weight).val(),
-                        pNo: $(pNo).val(), wNo: $(wNo).val(), gender: $(gender).val()},
+                        pNo: $(pNo).val(), wNo: $('#wNo option:selected').text(), gender: $('#gender option:selected').text()},
                     type: 'get',
                     success: function (data) {
                         $("#pId").html(data);
@@ -73,10 +73,17 @@ include_once 'Header.php'
                     <input type="text" id="fname" class="form-control" placeholder="First Name">
                     <hr>
                     <input  type="text" id="lname" class="form-control" placeholder="Last Name">
+                    <hr>                 
+                    <div class="input-group">
+                        <input type="text" id="hight" class="form-control" placeholder="Hight">
+                        <span class="input-group-addon">meter's</span>
+                    </div>
                     <hr>
-                    <input type="text" id="hight" class="form-control" placeholder="Hight">
-                    <hr>
-                    <input type="text" id="weight" class="form-control" placeholder="Weight">
+                    <div class="input-group">
+                        <input type="text" id="weight" class="form-control" placeholder="Weight">
+                        <span class="input-group-addon">kg</span>
+                    </div>
+
                     <hr>
 
 
@@ -87,11 +94,24 @@ include_once 'Header.php'
 
                 <div class = "col-sm-6 well">
 
-                    <input type="text" id="pNo" class="form-control" placeholder="Phone Number">
+                    <div class="input-group">
+                        <span class="input-group-addon">+880</span>
+                        <input type="text" id="pNo"  class="form-control" placeholder="Phone No">
+                    </div>
                     <hr>
-                    <input type="text" id="gender" class="form-control" placeholder="Gender">
+                    <select class="form-control"  id="gender">
+                        <option >Male</option>
+                        <option >Female</option>
+                    </select>
                     <hr>
-                    <input type="text" id="wNo" class="form-control" placeholder="Word No">
+                    <select class="form-control"  id="gender">
+                        <option >Word No</option>
+                        <option >1</option>
+                        <option >2</option>
+                        <option >3</option>
+                        <option >4</option>
+                        <option >5</option>
+                    </select>
                     <hr>
 
                 </div>

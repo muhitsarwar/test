@@ -36,7 +36,7 @@ include_once 'Header.php'
             var pNo = parseInt($('#pNo').val());
             var pwd1 = $('#pwd1').val();
             var pwd2 = $('#pwd2').val();
-            if(!Number.isInteger(pNo))return;
+            if(isNaN(pNo) && $('#pNo').val() != "")return;
 
             if (pwd1 == pwd2) {
                 $.ajax({url: '<?php echo base_url() . "doctor/updateProfile"; ?>',

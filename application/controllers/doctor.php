@@ -80,7 +80,7 @@ class doctor extends CI_Controller {
             $profile .= 'Gender: ';
             $profile .= $row['gender'];
             $profile .= "<hr>";
-            $profile .= 'Phone NO: ';
+            $profile .= 'Phone NO: +880';
             $profile .= $row['pNO'];
             $profile .= "<hr>";
             $profile .= 'Join Date: ';
@@ -151,7 +151,7 @@ class doctor extends CI_Controller {
             $profile .= 'Admission Date: ';
             $profile .= $row['aDate'];
             $profile .= "<hr>";
-            $profile .= 'Phone No: ';
+            $profile .= 'Phone No: +880';
             $profile .= $row['phn'];
             $profile .= "<hr>";
             $profile .= 'Gender: ';
@@ -371,10 +371,17 @@ class doctor extends CI_Controller {
         $pNo = $_GET['pNo'];
         $pwd = $_GET['pwd'];
         $gender = $_GET['gender'];
+        $pwdo = $_GET['pwdo'];
         $speciality = $_GET['speciality'];
-
+        
+        
         $this->load->model('doctor_user');
-
+        if(!$this->doctor_user->vPassword($pwdo)){
+            echo 'error';
+            return;
+        }
+        
+        
         $this->doctor_user->updateProfile($pNo, $pwd, $gender, $speciality);
     }
 

@@ -1,5 +1,4 @@
 <?php
-
 $pageTitle = 'profile';
 include_once 'Header.php'
 ?>
@@ -12,7 +11,7 @@ include_once 'Header.php'
 
 <script>
     $(function () {
-        
+
         $.ajax({url: '<?php echo base_url() . "doctor/showProfile"; ?>',
             data: {},
             type: 'get',
@@ -31,21 +30,25 @@ include_once 'Header.php'
         $('#saveChange').click(function () {
             $('#float').removeClass("has-error");
             $('#float').removeClass("has-success");
+            $('#float').addClass("has-error");
             var speciality = $('#speciality').val();
-            var gender = $('#gender').val();
-            var pNo = $('#pNo').val();
+            var gender = $('#gender option:selected').text();
+            var pNo = parseInt($('#pNo').val());
             var pwd1 = $('#pwd1').val();
             var pwd2 = $('#pwd2').val();
+            if(!Number.isInteger(pNo))return;
 
             if (pwd1 == pwd2) {
                 $.ajax({url: '<?php echo base_url() . "doctor/updateProfile"; ?>',
                     data: {speciality: speciality, gender: gender,
-                        pNo: pNo, pwd: pwd1},
+                        pNo: pNo, pwd: pwd1, pwdo: $('#pwd3').val()},
                     type: 'get',
                     success: function (data) {
-                        $('#float').removeClass("has-error");
-                        $('#float').removeClass("has-success");
-                        $('#float').addClass("has-success");
+                        if (data != 'error') {
+                            $('#float').removeClass("has-error");
+                            $('#float').removeClass("has-success");
+                            $('#float').addClass("has-success");
+                        }
                     }
                 }); // get the id from the hidden input
             } else {
@@ -102,14 +105,22 @@ include_once 'Header.php'
 
                                         <input type="text" id="speciality" class="form-control" placeholder="Speciality">
                                         <hr>
-                                        <input type="text" id="gender" class="form-control" placeholder="Gender">
+                                        <select class="form-control"  id="gender">
+                                            <option >Male</option>
+                                            <option >Female</option>
+                                        </select>
                                         <hr>
-                                        <input type="text" id="pNo" class="form-control" placeholder="Phone No">
-                                        <hr>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">+880</span>
+                                            <input type="text" id="pNo"  class="form-control" placeholder="Phone No">
+                                        </div>
 
+                                        <hr>
+                                        <input type="password" id="pwd3" class="form-control" placeholder="Old Password">
                                         Change Password:
+
                                         <input type="password" id="pwd1" class="form-control" placeholder="New Password">
-                                        <input type="password" id="pwd2" class="form-control" placeholder="Confirm PassWord">
+                                        <input type="password" id="pwd2" class="form-control" placeholder="Confirm New PassWord">
                                         <hr>
 
                                         <button type="button" id ="saveChange" class="btn btn-primary">Save Changes</button>	

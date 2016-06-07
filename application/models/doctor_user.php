@@ -14,6 +14,16 @@ class doctor_user extends CI_Model {
 
         return $query->result();
     }
+    
+    public function vPassword($pwd){
+        $query = $this->db->query(sprintf("select * from doctor where id = %d and password = '%s'", (int) $this->session->userdata('user_name'), md5($pwd)));
+    
+        if($query != NULL && $query->num_rows() == 1){
+            return true;
+        }else {
+            return false;
+        }
+    }
 
     public function addmedicine($mid, $time, $quan, $pid) {
         $query = $this->db->query(sprintf("select * from visit where p_id = %d and d_id = %d",(int)$pid,(int)$this->session->userdata('user_name')));
@@ -104,7 +114,7 @@ class doctor_user extends CI_Model {
     }
 
     public function showProfile() {
-        $query = $this->db->query(sprintf("SELECT concat(first_name,' ', last_name) name,gender,join_date jDate, phn_no pNO from doctor"));
+        $query = $this->db->query(sprintf("SELECT concat(first_name,' ', last_name) name,gender,join_date jDate, phn_no pNO from doctor where id = %d",(int) $this->session->userdata('user_name')));
 
         return $query;
     }

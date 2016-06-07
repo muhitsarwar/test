@@ -30,19 +30,20 @@ include_once 'Header.php'
         $('#saveChange').click(function () {
             $('#float').removeClass("has-error");
             $('#float').removeClass("has-success");
-         
+
             var gender = $('#gender').val();
-            var pNo = $('#pNo').val();
+            var pNo = parseInt($('#pNo').val());
             var pwd1 = $('#pwd1').val();
             var pwd2 = $('#pwd2').val();
+            if(!Number.isInteger(pNo))return;
 
             if (pwd1 == pwd2) {
                 $.ajax({url: '<?php echo base_url() . "recp/updateProfile"; ?>',
-                    data: { gender: gender,
+                    data: {gender: gender,
                         pNo: pNo, pwd: pwd1},
                     type: 'get',
                     success: function (data) {
-                        
+
                         $('#float').removeClass("has-error");
                         $('#float').removeClass("has-success");
                         $('#float').addClass("has-success");
@@ -84,7 +85,7 @@ include_once 'Header.php'
                         <!--                          data will be set by ajax-->
                     </div>
 
-                    
+
                 </div>
 
                 <div calss = "row">	
@@ -103,7 +104,10 @@ include_once 'Header.php'
 
                                         <input type="text" id="gender" class="form-control" placeholder="Gender">
                                         <hr>
-                                        <input type="text" id="pNo" class="form-control" placeholder="Phone No">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">+880</span>
+                                            <input type="text" id="pNo"  class="form-control" placeholder="Phone No">
+                                        </div>
                                         <hr>
 
                                         Change Password:

@@ -63,7 +63,7 @@ class recp extends CI_Controller {
             $profile .= 'Gender: ';
             $profile .= $row['gender'];
             $profile .= "<hr>";
-            $profile .= 'Phone NO: ';
+            $profile .= 'Phone NO: +880';
             $profile .= $row['pNO'];
             $profile .= "<hr>";
             $profile .= 'Join Date: ';

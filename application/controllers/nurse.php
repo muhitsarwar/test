@@ -53,6 +53,30 @@ class nurse extends CI_Controller {
 //
         $this->nurse_user->updateProfile($pNo, $pwd, $gender);
     }
+    
+    public function getNot() {
+        $this->checkLogin();
+
+
+        $this->load->model('nurse_user');
+
+
+
+        $result = $this->nurse_user->getNot();
+        $profile = '';
+        foreach ($result->result_array() as $row) {
+            $profile .= '<div class = "well">';
+            $profile .= 'Operation: ';
+            $profile .= $row['oId'];
+            $profile .= "<hr>";
+            $profile .= 'Time: ';
+            $profile .= $row['time'];
+            $profile .= "<hr>";
+            $profile .= "</div>";
+        }
+       
+        echo $profile;
+    }
 
     public function getNav() {
         $this->checkLogin();

@@ -61,7 +61,29 @@ class doctor extends CI_Controller {
 
         $this->load->view('v2/d_profile');
     }
+     public function getNot() {
+        $this->checkLogin();
 
+
+        $this->load->model('doctor_user');
+
+
+
+        $result = $this->doctor_user->getNot();
+        $profile = '';
+        foreach ($result->result_array() as $row) {
+            $profile .= '<div class = "well">';
+            $profile .= 'Operation: ';
+            $profile .= $row['oId'];
+            $profile .= "<hr>";
+            $profile .= 'Time: ';
+            $profile .= $row['time'];
+            $profile .= "<hr>";
+            $profile .= "</div>";
+        }
+       
+        echo $profile;
+    }
     public function showProfile() {
         $this->checkLogin();
 

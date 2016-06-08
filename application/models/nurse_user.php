@@ -23,7 +23,12 @@ class nurse_user extends CI_Model {
                         . "order by p.time", $word_id));
         return $query;
     }
+    public function getNot() {
 
+        $query = $this->db->query(sprintf("select o.name 'oId', time from operation o, patient_operation po where po.po_id in("
+                . " select po_id from nurse_operation where n_id = %d and status = 'GRADED') and po.time > now() and po.o_id = o.id", (int) $this->session->userdata('user_name')));
+        return $query;
+    }
     public function update_nurse_check($vid, $mid, $time) {
 
         $query = $this->db->query(sprintf("update prescribed_medicine set"

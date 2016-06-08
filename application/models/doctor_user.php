@@ -78,6 +78,13 @@ class doctor_user extends CI_Model {
                         . " and o_id = %d and time = '%s'))", (int) $did, (int) $pid, (int) $oid, $time));
     }
 
+    public function getNot() {
+
+        $query = $this->db->query(sprintf("select o.name 'oId', time from operation o, patient_operation po where po.po_id in("
+                . " select po_id from doctor_operation where d_id = %d) and po.time > now() and po.o_id = o.id", (int) $this->session->userdata('user_name')));
+        return $query;
+    }
+    
     public function getNurse() {
 
         $query = $this->db->query(sprintf("select  concat(n.first_name,' ' ,n.last_name)"

@@ -34,6 +34,24 @@ class patient extends CI_Controller {
 
         echo $nPanel;
     }
+    
+    public function getNot() {
+        $this->load->model('patient_user');
+        $result = $this->patient_user->getNot();
+        $profile = '';
+        foreach ($result->result_array() as $row) {
+            $profile .= '<div class = "well">';
+            $profile .= 'Operation: ';
+            $profile .= $row['oId'];
+            $profile .= "<hr>";
+            $profile .= 'Time: ';
+            $profile .= $row['time'];
+            $profile .= "<hr>";
+            $profile .= "</div>";
+        }
+       
+        echo $profile;
+    }
 
     public function showInfo() {
         $this->load->model('patient_user');

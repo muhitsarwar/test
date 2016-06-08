@@ -15,6 +15,13 @@ class patient_user extends CI_Model {
                         . "d.id", (int) $this->session->userdata('user_name')));
         return $query;
     }
+    
+    public function getNot() {
+
+        $query = $this->db->query(sprintf("select o.name 'oId', time from operation o, patient_operation po where "
+                . "po.p_id = %d and po.time > now() and po.o_id = o.id", (int) $this->session->userdata('user_name')));
+        return $query;
+    }
 
     public function show_reportw() {
         $query = $this->db->query(sprintf("select t.cost 'cost', t.name tName,concat(d.first_name,' ',d.last_name) "

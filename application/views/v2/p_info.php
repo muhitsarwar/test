@@ -26,6 +26,13 @@ include_once 'Header.php'
                 $('#nav').html(data);
             }
         });
+        $.ajax({url: '<?php echo base_url() . "patient/getNot"; ?>',
+            data: {},
+            type: 'get',
+            success: function (data) {
+                $('#not').html(data);
+            }
+        });
 
         
     });
@@ -64,16 +71,8 @@ include_once 'Header.php'
 
             </div>
             <div class="col-sm-2">
-                <div class="well">
-                    <div class="well">
-                        <p>Assigned in an operation on 1.2.3</p>
-                    </div>
-                    <div class="well">
-                        <p>Assigned in an operation on 1.2.3</p>
-                    </div>
-                    <div class="well">
-                        <p>Assigned in an operation on 1.2.3</p>
-                    </div>
+                <div id="not" class="well">
+                    
                 </div>
             </div>
         </div>

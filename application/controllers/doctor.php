@@ -157,6 +157,12 @@ class doctor extends CI_Controller {
             $profile .= 'Gender: ';
             $profile .= $row['gender'];
             $profile .= "<hr>";
+            $profile .= 'Hight: ';
+            $profile .= $row['hight'].' meteres';
+            $profile .= "<hr>";
+            $profile .= 'Weight: ';
+            $profile .= $row['weight'].' kg';
+            $profile .= "<hr>";
             $profile .= 'Word No: ';
             $profile .= $row['word'];
             $profile .= "<hr>";

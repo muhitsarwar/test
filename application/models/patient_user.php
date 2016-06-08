@@ -40,7 +40,7 @@ class patient_user extends CI_Model {
 
     public function showInfo() {
 
-        $query = $this->db->query(sprintf("select id 'pid',concat(first_name,' ',last_name)"
+        $query = $this->db->query(sprintf("select hight,weight, id 'pid',concat(first_name,' ',last_name)"
                         . " 'name', gender, admission_date 'adate',word_id 'wno' from patient where id = %d", (int) $this->session->userdata('user_name')));
 
         return $query;

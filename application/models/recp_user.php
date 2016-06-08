@@ -36,7 +36,7 @@ class recp_user extends CI_Model {
 
     public function eCost($pid) {
         $query = $this->db->query(sprintf("select sum(e.cost) 'tcost' from equipment e,operation_equipment oe "
-                . "where e.id = oe.e_id and oe.po_id in (select po_id from patient_operation where p_id = %d and time < now())", $pid));
+                . "where oe.status = 'GRADED' and e.id = oe.e_id and oe.po_id in (select po_id from patient_operation where p_id = %d and time < now())", $pid));
 
         foreach ($query->result_array() as $row) {
             return $row['tcost'];

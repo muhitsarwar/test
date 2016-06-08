@@ -120,7 +120,7 @@ class doctor_user extends CI_Model {
     }
 
     public function patientInfo($pid) {
-        $query = $this->db->query(sprintf("select concat(first_name ,' ', last_name) name, "
+        $query = $this->db->query(sprintf("select hight,weight, concat(first_name ,' ', last_name) name, "
                         . "admission_date aDate, word_id word,gender, phn_no phn from patient where id = %d", $pid));
 
         return $query;

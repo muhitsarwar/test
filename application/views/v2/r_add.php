@@ -25,7 +25,7 @@ include_once 'Header.php'
             $('#float').removeClass("has-success");
 
 
-
+           
             var r = confirm("Do you want to add this patient?");
             if (r == true) {
                 $.ajax({url: '<?php echo base_url() . "recp/addpatient"; ?>',
@@ -104,7 +104,7 @@ include_once 'Header.php'
                         <option >Female</option>
                     </select>
                     <hr>
-                    <select class="form-control"  id="gender">
+                    <select class="form-control"  id="wNo">
                         <option >Word No</option>
                         <option >1</option>
                         <option >2</option>

@@ -28,22 +28,25 @@ include_once 'Header.php'
         });
 
         $('#cRepor').click(function () {
+            var r = confirm("Do you want to add medicine " + $('#mname').val() + " starting at " + $('#mdate').val() + " repeating day(s) " + $('#repeat').val());
+            if (r == true) {
+                $.ajax({url: '<?php echo base_url() . "tech/cReport"; ?>',
+                    data: {pid: $('#pid').val(),
+                        elm_1: $('#elm_1').attr('placeholder') + ': ' + $('#elm_1').val(),
+                        elm_2: $('#elm_2').attr('placeholder') + ': ' + $('#elm_2').val(),
+                        elm_3: $('#elm_3').attr('placeholder') + ': ' + $('#elm_3').val(),
+                        elm_4: $('#elm_4').attr('placeholder') + ': ' + $('#elm_4').val(),
+                        elm_5: $('#elm_5').attr('placeholder') + ': ' + $('#elm_5').val(),
+                        elm_6: $('#elm_6').attr('placeholder') + ': ' + $('#elm_6').val(),
+                        elm_7: $('#elm_7').attr('placeholder') + ': ' + $('#elm_7').val(),
+                        elm_8: $('#elm_8').attr('placeholder') + ': ' + $('#elm_8').val()},
+                    type: 'get',
+                    success: function (data) {
+                        window.location.reload();
+                    }
+                });
+            }
 
-            $.ajax({url: '<?php echo base_url() . "tech/cReport"; ?>',
-                data: {pid:$('#pid').val(),
-                    elm_1: $('#elm_1').attr('placeholder') + ': ' + $('#elm_1').val(),
-                    elm_2: $('#elm_2').attr('placeholder') + ': ' + $('#elm_2').val(),
-                    elm_3: $('#elm_3').attr('placeholder') + ': ' + $('#elm_3').val(),
-                    elm_4: $('#elm_4').attr('placeholder') + ': ' + $('#elm_4').val(),
-                    elm_5: $('#elm_5').attr('placeholder') + ': ' + $('#elm_5').val(),
-                    elm_6: $('#elm_6').attr('placeholder') + ': ' + $('#elm_6').val(),
-                    elm_7: $('#elm_7').attr('placeholder') + ': ' + $('#elm_7').val(),
-                    elm_8: $('#elm_8').attr('placeholder') + ': ' + $('#elm_8').val() },
-                type: 'get',
-                success: function (data) {
-                   
-                }
-            });
         });
 
     });
